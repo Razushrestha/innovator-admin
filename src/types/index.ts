@@ -22,7 +22,7 @@ export interface AdminCourse {
   category_name: string;
   title: string;
   description: string;
-  price: string;
+  price: number;
   is_published?: boolean;
   created_at: string;
   vendor?: string;
@@ -39,7 +39,7 @@ export interface Course {
   category_name: string;
   title: string;
   description: string;
-  price: string;
+  price: number;
   is_published: boolean;
   created_at: string;
   contents: CourseContent[];
@@ -53,7 +53,7 @@ export interface CourseList {
   category_name: string;
   title: string;
   description: string;
-  price: string;
+  price: number;
   is_published: boolean;
   created_at: string;
 }
@@ -85,11 +85,11 @@ export interface VendorProfile {
   email: string;
   is_approved: boolean;
   bio?: string | null;
-  commission_rate?: string;
-  commission_amount: string;
-  total_earnings: string;
+  commission_rate?: number;
+  commission_amount: number;
+  total_earnings: number;
   created_at: string;
-  courses_count: string;
+  courses_count: number;
   courses: string;
 }
 

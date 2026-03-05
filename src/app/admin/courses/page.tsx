@@ -30,7 +30,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { courseSchema, courseContentSchema, type CourseFormData, type CourseContentFormData } from '@/lib/validations';
 import type { AdminCourse, Category, CourseContent, VendorProfile } from '@/types';
 
-const emptyCourse = { title: '', description: '', price: '', category: '', vendor: '', is_published: false };
+const emptyCourse = { title: '', description: '', price: 0, category: '', vendor: '', is_published: false };
 const emptyContent = { title: '', video_url: '', document_url: '', course_level: '', order: 0 };
 const PAGE_SIZE = 10;
 

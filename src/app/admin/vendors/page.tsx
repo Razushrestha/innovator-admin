@@ -314,13 +314,13 @@ export default function VendorsPage() {
                         <div className="flex items-center gap-1 text-emerald-400 font-semibold"><DollarSign className="w-3 h-3" />{v.total_earnings}</div>
                       </td>}
                       {isColVisible('commission') && <td className="px-5 py-3.5">
-        <InlineEditCell
-          value={v.commission_rate ?? ''}
-          type="number"
-          placeholder="—"
+                        <InlineEditCell
+                          value={v.commission_rate?.toString() ?? ''}
+                          type="number"
+                          placeholder="—"
           disabled={!can('update')}
           onSave={async (val) => {
-            const updated = await adminVendors.update(v.id, { commission_rate: val });
+            const updated = await adminVendors.update(v.id, { commission_rate: Number(val) });
             setVendors((prev) => prev.map((item) => (item.id === updated.id ? updated : item)));
             log('update', 'Vendor', `Set commission to ${val}% for ${v.full_name || v.username}`);
           }}

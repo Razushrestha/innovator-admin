@@ -49,10 +49,10 @@ export default function DashboardPage() {
   }
 
   const kpis = [
-    { label: 'Total Courses', value: data?.stats.courses.value || 0, trend: data?.stats.courses.trend, icon: BookOpen, color: 'indigo' },
-    { label: 'Total Vendors', value: data?.stats.vendors.value || 0, trend: data?.stats.vendors.trend, icon: Users, color: 'violet' },
-    { label: 'Enrollments', value: data?.stats.enrollments.value || 0, trend: data?.stats.enrollments.trend, icon: GraduationCap, color: 'emerald' },
-    { label: 'Revenue', value: `$${data?.stats.revenue.value || '0.00'}`, trend: data?.stats.revenue.trend, icon: CreditCard, color: 'amber' },
+    { label: 'Total Courses', value: data?.stats.courses.value || 0, trend: data?.stats.courses.trend, icon: BookOpen, color: 'indigo' as const },
+    { label: 'Total Vendors', value: data?.stats.vendors.value || 0, trend: data?.stats.vendors.trend, icon: Users, color: 'violet' as const },
+    { label: 'Enrollments', value: data?.stats.enrollments.value || 0, trend: data?.stats.enrollments.trend, icon: GraduationCap, color: 'emerald' as const },
+    { label: 'Revenue', value: `$${data?.stats.revenue.value || '0.00'}`, trend: data?.stats.revenue.trend, icon: CreditCard, color: 'amber' as const },
   ];
 
   return (
@@ -113,7 +113,7 @@ export default function DashboardPage() {
             color="#10b981"
             loading={loading}
           />
-          <ActivityFeed limit={10} title="System Activity" />
+          <ActivityFeed limit={10} />
         </div>
       </div>
     </div>
