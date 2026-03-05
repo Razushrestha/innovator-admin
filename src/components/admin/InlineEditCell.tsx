@@ -69,13 +69,20 @@ export default function InlineEditCell({
     const trimmed = type === 'text' ? draft.trim() : draft;
     if (trimmed === value) { setEditing(false); return; }
     if (!trimmed) { setError('Value cannot be empty'); return; }
+    
+    // --- OPTIMISTIC UI ---
+    // Instantly hide editing mode so user sees the change immediately
+    setEditing(false); 
     setSaving(true);
     setError(null);
     try {
       await onSave(trimmed);
-      setEditing(false);
+      // Value will stay as draft via external prop update
     } catch (e) {
+      // --- ROLLBACK ---
       setError(e instanceof Error ? e.message : 'Save failed');
+      setDraft(value); // Revert local state to previous value
+      setEditing(true); // Re-open for fixing if it failed
     } finally {
       setSaving(false);
     }

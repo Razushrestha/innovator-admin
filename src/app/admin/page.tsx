@@ -5,6 +5,7 @@ import Header from '@/components/admin/Header';
 import StatsCard from '@/components/admin/StatsCard';
 import Badge from '@/components/admin/Badge';
 import ChartCard from '@/components/admin/ChartCard';
+import ChartErrorBoundary from '@/components/admin/ChartErrorBoundary';
 import ActivityFeed from '@/components/admin/ActivityFeed';
 import {
   BookOpen, Users, GraduationCap, FolderOpen, CreditCard,
@@ -80,39 +81,47 @@ export default function DashboardPage() {
         {/* Charts Section */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2">
+            <ChartErrorBoundary title="Enrollment Trend" onReset={fetchSummary}>
+              <ChartCard
+                title="Enrollment Trend"
+                subtitle="Last 7 days"
+                type="area"
+                data={data?.charts.enrollmentTrend || []}
+                dataKey="count"
+                xKey="name"
+                color="#6366f1"
+                loading={loading}
+              />
+            </ChartErrorBoundary>
+          </div>
+          <ChartErrorBoundary title="Courses by Category" onReset={fetchSummary}>
             <ChartCard
-              title="Enrollment Trend"
-              subtitle="Last 7 days"
-              type="area"
-              data={data?.charts.enrollmentTrend || []}
-              dataKey="count"
+              title="Courses by Category"
+              subtitle="Top 6 distribution"
+              type="pie"
+              data={data?.charts.categoryDistribution || []}
+              dataKey="value"
               xKey="name"
-              color="#6366f1"
               loading={loading}
             />
-          </div>
-          <ChartCard
-            title="Courses by Category"
-            subtitle="Top 6 distribution"
-            type="pie"
-            data={data?.charts.categoryDistribution || []}
-            dataKey="value"
-            xKey="name"
-            loading={loading}
-          />
+          </ChartErrorBoundary>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <ChartCard
-            title="Revenue Trend"
-            subtitle="Last 6 months (Approved payouts)"
-            type="bar"
-            data={data?.charts.revenueTrend || []}
-            dataKey="revenue"
-            xKey="name"
-            color="#10b981"
-            loading={loading}
-          />
+          <div className="">
+            <ChartErrorBoundary title="Revenue Trend" onReset={fetchSummary}>
+              <ChartCard
+                title="Revenue Trend"
+                subtitle="Last 6 months (Approved payouts)"
+                type="bar"
+                data={data?.charts.revenueTrend || []}
+                dataKey="revenue"
+                xKey="name"
+                color="#10b981"
+                loading={loading}
+              />
+            </ChartErrorBoundary>
+          </div>
           <ActivityFeed limit={10} />
         </div>
       </div>

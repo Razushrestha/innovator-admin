@@ -9,11 +9,12 @@ export interface ActivityEntry {
   detail: string;
   timestamp: string;
   type: 'create' | 'update' | 'delete' | 'approve' | 'reject' | 'login' | 'info';
+  link?: string;
 }
 
 interface ActivityCtx {
   activities: ActivityEntry[];
-  log: (entryOrType: Omit<ActivityEntry, 'id' | 'timestamp'> | ActivityEntry['type'], resource?: string, detail?: string) => void;
+  log: (entryOrType: Omit<ActivityEntry, 'id' | 'timestamp'> | ActivityEntry['type'], resource?: string, detail?: string, link?: string) => void;
   clear: () => void;
 }
 
@@ -36,10 +37,10 @@ export function ActivityProvider({ children }: { children: React.ReactNode }) {
     } catch {}
   }, []);
 
-  const log = useCallback((entryOrType: Omit<ActivityEntry, 'id' | 'timestamp'> | ActivityEntry['type'], resource?: string, detail?: string) => {
+  const log = useCallback((entryOrType: Omit<ActivityEntry, 'id' | 'timestamp'> | ActivityEntry['type'], resource?: string, detail?: string, link?: string) => {
     const entry: Omit<ActivityEntry, 'id' | 'timestamp'> =
       typeof entryOrType === 'string'
-        ? { type: entryOrType as ActivityEntry['type'], action: entryOrType, resource: resource ?? '', detail: detail ?? '' }
+        ? { type: entryOrType as ActivityEntry['type'], action: entryOrType, resource: resource ?? '', detail: detail ?? '', link }
         : entryOrType;
     const newEntry: ActivityEntry = {
       ...entry,

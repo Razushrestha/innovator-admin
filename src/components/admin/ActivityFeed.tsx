@@ -1,8 +1,9 @@
 'use client';
 
-import { Clock, Plus, Pencil, Trash2, CheckCircle, XCircle, LogIn, Info } from 'lucide-react';
+import { Clock, Plus, Pencil, Trash2, CheckCircle, XCircle, LogIn, Info, ExternalLink } from 'lucide-react';
 import { useActivity } from '@/context/ActivityContext';
 import type { ActivityEntry } from '@/context/ActivityContext';
+import Link from 'next/link';
 
 const iconMap = {
   create: <Plus size={13} className="text-emerald-400" />,
@@ -33,20 +34,31 @@ function timeAgo(iso: string): string {
 }
 
 function ActivityItem({ entry }: { entry: ActivityEntry }) {
-  return (
-    <div className={`flex items-start gap-2.5 p-3 rounded-lg border ${bgMap[entry.type]}`}>
+  const content = (
+    <div className={`flex items-start gap-2.5 p-3 rounded-lg border transition-all ${bgMap[entry.type]} ${entry.link ? 'hover:scale-[1.01] hover:shadow-lg hover:shadow-indigo-500/10 active:scale-[0.99]' : ''}`}>
       <div className="mt-0.5 w-5 h-5 rounded-full bg-gray-800 flex items-center justify-center shrink-0">
         {iconMap[entry.type]}
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-center justify-between gap-2">
-          <span className="text-xs font-medium text-white capitalize">{entry.action}</span>
-          <span className="text-xs text-gray-500 shrink-0">{timeAgo(entry.timestamp)}</span>
+          <div className="flex items-center gap-1.5">
+            <span className="text-[10px] font-bold text-white uppercase tracking-wider opacity-90">{entry.action}</span>
+            {entry.link && <ExternalLink size={10} className="text-gray-500" />}
+          </div>
+          <span className="text-[10px] text-gray-500 shrink-0 font-medium">{timeAgo(entry.timestamp)}</span>
         </div>
-        <p className="text-xs text-gray-400 mt-0.5">{entry.resource}: {entry.detail}</p>
+        <p className="text-xs text-gray-400 mt-1 leading-relaxed ring-offset-gray-900 line-clamp-2">
+          <span className="text-gray-200 font-medium">{entry.resource}:</span> {entry.detail}
+        </p>
       </div>
     </div>
   );
+
+  if (entry.link) {
+    return <Link href={entry.link} className="block group">{content}</Link>;
+  }
+
+  return content;
 }
 
 export default function ActivityFeed({ limit = 20 }: { limit?: number }) {
