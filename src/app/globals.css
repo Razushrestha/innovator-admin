@@ -1,0 +1,172 @@
+@import "tailwindcss";
+
+:root {
+  --background: #030712;
+  --foreground: #f9fafb;
+}
+
+[data-theme='light'] {
+  --background: #f1f5f9;
+  --foreground: #0f172a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* Light mode — invert dark grays to light equivalents */
+html.light body { background: #f1f5f9; color: #0f172a; }
+html.light .bg-gray-950 { background-color: #f1f5f9 !important; }
+html.light .bg-gray-900 { background-color: #ffffff !important; }
+html.light .bg-gray-800 { background-color: #f8fafc !important; }
+html.light .bg-gray-800\/80 { background-color: rgba(248,250,252,0.9) !important; }
+html.light .bg-gray-950\/80 { background-color: rgba(241,245,249,0.9) !important; }
+html.light .bg-gray-900\/50 { background-color: rgba(255,255,255,0.6) !important; }
+html.light .border-gray-800 { border-color: #e2e8f0 !important; }
+html.light .border-gray-700 { border-color: #cbd5e1 !important; }
+html.light .border-gray-600 { border-color: #94a3b8 !important; }
+html.light .text-white { color: #0f172a !important; }
+html.light .text-gray-100 { color: #1e293b !important; }
+html.light .text-gray-200 { color: #334155 !important; }
+html.light .text-gray-300 { color: #475569 !important; }
+html.light .text-gray-400 { color: #64748b !important; }
+html.light .text-gray-500 { color: #94a3b8 !important; }
+html.light .text-gray-600 { color: #cbd5e1 !important; }
+html.light .hover\:bg-gray-800:hover { background-color: #e2e8f0 !important; }
+html.light .hover\:bg-gray-700:hover { background-color: #e2e8f0 !important; }
+html.light tr:hover td { background-color: #f8fafc !important; }
+
+/* Custom scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #374151 transparent;
+}
+*::-webkit-scrollbar { width: 6px; height: 6px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb { background-color: #374151; border-radius: 3px; }
+*::-webkit-scrollbar-thumb:hover { background-color: #4b5563; }
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Tiptap editor prose tweaks */
+.tiptap p.is-editor-empty:first-child::before {
+  color: #6b7280;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+.tiptap h2 { font-size: 1.1rem; font-weight: 600; color: #e5e7eb; margin: 0.75em 0 0.25em; }
+.tiptap h3 { font-size: 1rem; font-weight: 600; color: #e5e7eb; margin: 0.5em 0 0.25em; }
+.tiptap blockquote { border-left: 3px solid #4f46e5; padding-left: 1em; color: #9ca3af; font-style: italic; }
+.tiptap code { background: #374151; padding: 0.1em 0.4em; border-radius: 4px; font-size: 0.85em; }
+.tiptap ul, .tiptap ol { padding-left: 1.5em; }
+.tiptap li { margin: 0.2em 0; }
+
+/* ═══════════════════════════════════════════════
+   LIGHT MODE — Extended Overrides
+   Applied when <html class="light"> is set
+   ═══════════════════════════════════════════════ */
+
+/* --- More gray variants --- */
+html.light .bg-gray-800\/40  { background-color: rgba(241,245,249,0.8)  !important; }
+html.light .bg-gray-900\/80  { background-color: rgba(255,255,255,0.92) !important; }
+html.light .bg-gray-950\/50  { background-color: rgba(241,245,249,0.6)  !important; }
+html.light .divide-gray-800 > * + * { border-color: #e2e8f0 !important; }
+
+/* --- Sidebar active / hover chip --- */
+html.light .bg-indigo-600\/20  { background-color: rgba(99,102,241,0.10)  !important; }
+html.light .bg-indigo-500\/10  { background-color: rgba(99,102,241,0.08)  !important; }
+html.light .bg-indigo-500\/5   { background-color: rgba(99,102,241,0.05)  !important; }
+html.light .border-indigo-500\/30 { border-color: rgba(99,102,241,0.30)  !important; }
+html.light .border-indigo-500\/50 { border-color: rgba(99,102,241,0.45)  !important; }
+html.light .text-indigo-400    { color: #4f46e5 !important; }
+html.light .text-indigo-300    { color: #6366f1 !important; }
+html.light .hover\:text-indigo-300:hover { color: #4f46e5 !important; }
+html.light .bg-indigo-900\/30  { background-color: rgba(99,102,241,0.10)  !important; }
+html.light .bg-indigo-900      { background-color: #e0e7ff !important; }
+
+/* --- Badge color variants (info/success/warning/danger) --- */
+/* Indigo / info */
+html.light .bg-indigo-900\/50  { background-color: #e0e7ff !important; }
+html.light .text-indigo-400    { color: #3730a3 !important; }
+/* Emerald / success */
+html.light .bg-emerald-900\/50 { background-color: #d1fae5 !important; }
+html.light .bg-emerald-900     { background-color: #d1fae5 !important; }
+html.light .text-emerald-400   { color: #065f46 !important; }
+html.light .text-emerald-300   { color: #047857 !important; }
+html.light .border-emerald-500\/30 { border-color: rgba(16,185,129,0.35) !important; }
+/* Amber / warning */
+html.light .bg-amber-900\/50   { background-color: #fef3c7 !important; }
+html.light .bg-amber-900       { background-color: #fef3c7 !important; }
+html.light .text-amber-400     { color: #92400e !important; }
+html.light .text-amber-300     { color: #b45309 !important; }
+html.light .border-amber-500\/30 { border-color: rgba(245,158,11,0.35) !important; }
+/* Rose / danger */
+html.light .bg-rose-900\/50    { background-color: #ffe4e6 !important; }
+html.light .bg-rose-900        { background-color: #ffe4e6 !important; }
+html.light .text-rose-400      { color: #9f1239 !important; }
+html.light .text-rose-300      { color: #be123c !important; }
+html.light .border-rose-500\/30 { border-color: rgba(244,63,94,0.35)   !important; }
+/* Blue */
+html.light .bg-blue-900\/50    { background-color: #dbeafe !important; }
+html.light .text-blue-400      { color: #1d4ed8 !important; }
+html.light .border-blue-500\/30 { border-color: rgba(59,130,246,0.35)  !important; }
+/* Purple */
+html.light .bg-purple-900\/50  { background-color: #ede9fe !important; }
+html.light .text-purple-400    { color: #6d28d9 !important; }
+html.light .border-purple-500\/30 { border-color: rgba(139,92,246,0.35)!important; }
+
+/* --- Primary action buttons keep indigo, just ensure text is readable --- */
+html.light .bg-indigo-600      { background-color: #4f46e5 !important; }
+html.light .hover\:bg-indigo-700:hover { background-color: #4338ca !important; }
+html.light .bg-indigo-600 * ,
+html.light .hover\:bg-indigo-700:hover * { color: #ffffff !important; }
+
+/* --- Form inputs in light mode --- */
+html.light input:not([type=checkbox]):not([type=radio]),
+html.light textarea,
+html.light select {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+html.light input::placeholder,
+html.light textarea::placeholder { color: #94a3b8 !important; }
+html.light input:focus,
+html.light textarea:focus,
+html.light select:focus {
+  border-color: #6366f1 !important;
+  outline-color: rgba(99,102,241,0.25) !important;
+}
+
+/* --- Recharts (dashboard charts) --- */
+html.light .recharts-cartesian-grid-horizontal line,
+html.light .recharts-cartesian-grid-vertical   line { stroke: #e2e8f0 !important; }
+html.light .recharts-text                           { fill:   #64748b !important; }
+html.light .recharts-tooltip-wrapper .recharts-default-tooltip {
+  background-color: #ffffff   !important;
+  border-color:     #e2e8f0   !important;
+  color:            #0f172a   !important;
+}
+html.light .recharts-legend-item-text             { color: #475569   !important; }
+
+/* --- Tiptap editor in light mode --- */
+html.light .tiptap              { color: #0f172a   !important; background: #ffffff !important; }
+html.light .tiptap h2,
+html.light .tiptap h3           { color: #1e293b   !important; }
+html.light .tiptap blockquote   { color: #475569   !important; }
+html.light .tiptap code         { background: #f1f5f9 !important; color: #0f172a !important; }
+
+/* --- Scrollbar in light mode --- */
+html.light * { scrollbar-color: #cbd5e1 transparent; }
+html.light *::-webkit-scrollbar-thumb { background-color: #cbd5e1; }
+html.light *::-webkit-scrollbar-thumb:hover { background-color: #94a3b8; }
+
